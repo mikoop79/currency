@@ -37,7 +37,7 @@ return [
 
         'sqlite' => [
             'driver' => 'sqlite',
-            'url' => '..//Users/michael.cooper/Sites/coop/project/laravel-app/database/database.sqlite',
+            'url' => sprintf('./%s', database_path('database.sqlite')),
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),

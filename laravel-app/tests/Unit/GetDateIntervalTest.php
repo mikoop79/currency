@@ -2,12 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\Report;
 use App\Services\ReportGenerate\ReportTypes\BaseReport;
 use App\Services\ReportGenerate\ReportTypes\Report1;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 
 class GetDateIntervalTest extends TestCase
@@ -22,9 +19,11 @@ class GetDateIntervalTest extends TestCase
         $now = Carbon::now();
         $start = Carbon::now()->subYear();
 
-        $dates = Report1::getIntervals([
+        $dates = Report1::getIntervals(
+            [
             'start_date' => $start->format(BaseReport::DEFAULT_FORMAT), 'end_date' => $now->format(BaseReport::DEFAULT_FORMAT), 'carbon_interval' => '1 month'
-        ]);
+            ]
+        );
 
         $this->assertTrue(count($dates) >= 12);
     }
@@ -35,11 +34,13 @@ class GetDateIntervalTest extends TestCase
         $now = Carbon::now();
         $start = Carbon::now()->subMonths(6);
 
-        $dates = Report1::getIntervals([
+        $dates = Report1::getIntervals(
+            [
             'start_date' => $start->format(BaseReport::DEFAULT_FORMAT), 'end_date' => $now->format(BaseReport::DEFAULT_FORMAT), 'carbon_interval' => '1 week'
-        ]);
+            ]
+        );
 
-        $this->assertTrue(count($dates) >= 27 );
+        $this->assertTrue(count($dates) >= 27);
 
     }
 
