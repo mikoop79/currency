@@ -14,13 +14,14 @@
         :loading="currenciesLoading"
         :options="currencies"
       />
+      <div>{{ message }}</div>
       <div
         class="submitReport flex bg-gray-800  cursor-pointer items-center justify-center m-2 px-8 py-1 text-base text-white font-medium leading-6 text-black transition duration-150 ease-in-out bg-dark border-transparent rounded-md focus:outline-none focus:ring md:py-4 md:text-lg md:px-10"
         @click="saveReport"
       >
         Generate
       </div>
-      <div>{{ message }}</div>
+
     </div>
     <h2 class="heading2">
       My Completed reports
@@ -76,6 +77,8 @@ export default defineComponent({
   methods: {
 
     saveReport() {
+      let _this = this;
+
       axios.post('/api/report/submit', {
         currency: this.report.currency.value,
         type: this.selected.value,
@@ -88,14 +91,19 @@ export default defineComponent({
 
             this.message = data.message;
 
-            let _this = this;
+
             setTimeout(function () {
               _this.refreshGenerateForm()
             }, 3000)
 
           })
-          .catch((error) => {
-            this.message = error
+          .catch(({response}) => {
+            console.log(response);
+            this.message = response.data.message ?? 'there was an Error submitting your Report!'
+
+            setTimeout(function () {
+              _this.refreshMessage()
+            }, 5000)
           })
     },
     getReportTypes() {
@@ -117,6 +125,10 @@ export default defineComponent({
     refreshGenerateForm() {
       this.report.currency = default_report_type;
       this.selected = default_currency_type;
+      this.message = '';
+    },
+
+    refreshMessage() {
       this.message = '';
     }
   }

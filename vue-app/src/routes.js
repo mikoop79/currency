@@ -5,9 +5,9 @@ import NotFound from './components/NotFound.vue'
 
 /** @type {import('vue-router').RouterOptions['routes']} */
 export let routes = [
-    { path: '/', component: HomePage, meta: { title: 'Home', requiresAuth: true } },
-    { path: '/login', component: LoginPage, meta: { title: 'Login' } },
-    { path: '/register', component: RegisterPage, meta: { title: 'Register' } },
+    { path: '/', component: HomePage, meta: { title: 'Reports', requiresAuth: true } },
+    { path: '/login', component: LoginPage, meta: { title: 'Login to Start' } },
+    { path: '/register', component: RegisterPage, meta: { title: 'Register an account' } },
     { path: '/:path(.*)', component: NotFound },
 ]
 

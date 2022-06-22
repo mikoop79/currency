@@ -27,11 +27,6 @@ class BaseReport
         $this->service = new ApiRequestService();
     }
 
-    public function updateReportStatus(int $status_id)
-    {
-        $this->report->update(['status_id' => $status_id]);
-    }
-
     public function getData(): ?array
     {
         return $this->report->data ?? null;
@@ -48,8 +43,6 @@ class BaseReport
         foreach (CarbonPeriod::create($params['start_date'], $params['carbon_interval'], $params['end_date']) as $date) {
             $dates[] = $date->format(self::DEFAULT_FORMAT);
         }
-
-        Log::stack(['stdout'])->info('dates', [$dates]);
 
         return $dates;
     }
@@ -91,7 +84,7 @@ class BaseReport
 
 
         if (empty($data['quotes'])) {
-            throw new Exception('Error with endpoint');
+            throw new \JsonException('Error with endpoint');
         }
 
         $dates = self::getIntervals(array_merge($params, [

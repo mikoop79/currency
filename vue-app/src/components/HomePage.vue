@@ -25,7 +25,7 @@
             <div v-show="selected.length">
               <div
                 v-if="selected.length === currencies_limit"
-                class="flex bg-gray-800  items-center justify-center m-2 px-8 py-1 text-base text-white font-medium leading-6 text-black transition duration-150 ease-in-out bg-dark border-transparent rounded-md focus:outline-none focus:ring md:py-4 md:text-lg md:px-10"
+                class="flex bg-gray-800 cursor-pointer items-center justify-center m-2 px-8 py-1 text-base text-white font-medium leading-6 text-black transition duration-150 ease-in-out bg-dark border-transparent rounded-md focus:outline-none focus:ring md:py-4 md:text-lg md:px-10"
                 @click="save"
               >
                 Save my Currencies

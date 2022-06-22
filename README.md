@@ -59,8 +59,9 @@ php artisan currency:collect
 php artisan serve
 ```
 
-go to url (depending on port)  eg. [http://127.0.0.1:8000/login](http://127.0.0.1:8000/login)
-
+1. Go to url (depending on port)  eg. [http://127.0.0.1:8000/register](http://127.0.0.1:8000/register)  
+2.Register a user, then login - [http://127.0.0.1:8000/login](http://127.0.0.1:8000/login)
+ 
 
 
 

@@ -1,4 +1,5 @@
 <template>
+  <div class="flex w-1/6 mx-auto bg-gray-800 cursor-pointer items-center justify-center m-2 px-2 py-1 text-base text-white font-medium leading-6 text-black transition duration-150 ease-in-out bg-dark border-transparent rounded-md"  @click="doSearch">Refresh Reports</div>
   <table-lite
     :has-checkbox="false"
     :is-loading="table.isLoading"
@@ -39,18 +40,18 @@ const table = reactive({
     {
       label: "Currency",
       field: "currency",
-      width: "5%",
+      width: "4%",
       sortable: true,
     },
     {
       label: "Date",
       field: "created_at",
-      width: "7%",
+      width: "10%",
     },
     {
       label: "Data",
       field: "data",
-      width: "50%",
+      width: "70%",
     },
   ],
   rows: [],
@@ -107,42 +108,9 @@ export default defineComponent({
     TableLite,
   },
   setup() {
-    // const tableLoadingFinish = (elements) => {
-    //   table.isLoading = false;
-    //   Array.prototype.forEach.call(elements, function (element) {
-    //     if (element.classList.contains("name-btn")) {
-    //       element.addEventListener("click", function () {
-    //         console.log(this.dataset.id + " name-btn click!!");
-    //       });
-    //     }
-    //     if (element.classList.contains("quick-btn")) {
-    //
-    //       element.addEventListener("click", function () {
-    //         console.log(this.dataset.id + " quick-btn click!!");
-    //       });
-    //     }
-    //   });
-    // };
-    //
-    // const updateCheckedRows = (rowsKey) => {
-    //   console.log(rowsKey);
-    // };
-    //
-    // const searchTerm = ref("");
-    // const data = reactive([]);
-    // for (let i = 0; i < 126; i++) {
-    //   data.push({
-    //     id: i,
-    //     name: "TEST" + i,
-    //     email: "test" + i + "@example.com",
-    //   });
-    // }
-
     return {
       table,
       doSearch,
-      // tableLoadingFinish,
-      // updateCheckedRows,
     };
   },
 });

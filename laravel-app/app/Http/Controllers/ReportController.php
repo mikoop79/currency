@@ -27,7 +27,7 @@ class ReportController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return json_encode($validator->errors());
+                throw new \Exception(implode(',', $validator->errors()->all()), 422);
             }
 
             $params = array_merge($request->all(), ['user_id' => $user->getKey(), 'status_id' => Report::REPORT_STATUSES['pending']]);
@@ -37,10 +37,10 @@ class ReportController extends Controller
 
         } catch (\Exception $exception) {
             Log::error('error', [$exception, $exception->getCode()]);
-            return response()->json(['message' => $exception->getMessage()], 500);
+            return response()->json(['message' => $exception->getMessage()], $exception->getCode());
         }
 
-        return response()->json(['message' => 'Report Schedule To Generate!', 'report' => $report->toArray()], 200);
+        return response()->json(['message' => 'Report scheduled to generate! ', 'report' => $report->toArray()], 200);
 
     }
 
