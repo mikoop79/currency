@@ -10,7 +10,7 @@ yarn
 ```
 
 ```
-yarn run watch 
+yarn run build-app 
 ```
 > the watch command will build the files and copy them to the laravel application
 

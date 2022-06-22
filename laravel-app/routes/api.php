@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('list', [CurrencyApiController::class, 'list']);
         Route::get('convert', [CurrencyApiController::class, 'convert']);
         Route::get('change', [CurrencyApiController::class, 'change']);
+        Route::get('live', [CurrencyApiController::class, 'live']);
     });
     // settings
     Route::group(['prefix' => 'setting'], function () {

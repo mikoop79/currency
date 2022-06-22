@@ -35,7 +35,7 @@ class CollectReports implements ShouldQueue
         // get any reports with status pending..
         $reports = Report::where('status_id', Report::REPORT_STATUSES['pending'])->get();
 
-        if (empty($reports) ){
+        if (empty($reports) ) {
             Log::info('No jobs to generate.');
             return;
         }

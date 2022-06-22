@@ -21,10 +21,12 @@ class ReportController extends Controller
         try {
             /* @var User $user */
             $user = Auth::user();
-            $validator = Validator::make($request->all(), [
+            $validator = Validator::make(
+                $request->all(), [
                 'currency' => 'required',
                 'type' => 'required',
-            ]);
+                ]
+            );
 
             if ($validator->fails()) {
                 throw new \Exception(implode(',', $validator->errors()->all()), 422);
@@ -45,7 +47,7 @@ class ReportController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request $request
      * @return AnonymousResourceCollection
      */
     public function my(Request $request)

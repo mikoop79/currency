@@ -13,7 +13,7 @@ class ReportGenerateService
 
 
     /**
-     * @param Report $report
+     * @param  Report $report
      * @return ReportGenerateStrategy|null
      */
     public static function getReportStrategy(Report $report): ?ReportGenerateStrategy
@@ -22,15 +22,15 @@ class ReportGenerateService
 
         switch ($report->type)
         {
-            case 1  :
-                $reportGeneratorType = new ReportGenerateStrategy(new Report1($report));
-                break;
-            case 2 :
-                $reportGeneratorType = new ReportGenerateStrategy(new Report2($report));
-                break;
-            case 3 :
-                $reportGeneratorType = new ReportGenerateStrategy(new Report3($report));
-                break;
+        case 1  :
+            $reportGeneratorType = new ReportGenerateStrategy(new Report1($report));
+            break;
+        case 2 :
+            $reportGeneratorType = new ReportGenerateStrategy(new Report2($report));
+            break;
+        case 3 :
+            $reportGeneratorType = new ReportGenerateStrategy(new Report3($report));
+            break;
 
         }
 

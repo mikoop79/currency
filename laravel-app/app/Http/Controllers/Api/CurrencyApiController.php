@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\ApiRequestService;
+use App\Services\ReformatResponseService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CurrencyApiController extends Controller
 {
@@ -19,8 +21,9 @@ class CurrencyApiController extends Controller
         $this->service = $service;
     }
 
-    /**v
-     * @param Request $request
+    /**
+     *
+     * @param  Request $request
      * @return array|mixed
      */
     public function list(Request $request)
@@ -29,7 +32,7 @@ class CurrencyApiController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request $request
      * @return JsonResponse
      */
     public function convert(Request $request): JsonResponse
@@ -38,7 +41,7 @@ class CurrencyApiController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request $request
      * @return JsonResponse
      */
     public function change(Request $request): JsonResponse
@@ -47,7 +50,7 @@ class CurrencyApiController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request $request
      * @return JsonResponse
      */
     public function historical(Request $request): JsonResponse
@@ -55,4 +58,30 @@ class CurrencyApiController extends Controller
         return response()->json($this->service->get('historical', $request->all())->json());
     }
 
+    /**
+     * @param  Request $request
+     * @return JsonResponse
+     */
+    public function live(Request $request): JsonResponse
+    {
+        $validator = Validator::make(
+            $request->all(), [
+            'currencies' => 'required|array',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                'errors' => $validator->errors()->all()
+                ], 422
+            );
+        }
+
+        $requestParams = ReformatResponseService::reformatCurrencyString($request->get('currencies'), 'currencies');
+
+        $response = $this->service->get('live', $requestParams)->json()['quotes'];
+
+        return response()->json(['data' => ReformatResponseService::reformatConversionResponse($response)]);
+    }
 }

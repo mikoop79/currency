@@ -1,5 +1,10 @@
 <template>
-  <div class="flex w-1/6 mx-auto bg-gray-800 cursor-pointer items-center justify-center m-2 px-2 py-1 text-base text-white font-medium leading-6 text-black transition duration-150 ease-in-out bg-dark border-transparent rounded-md"  @click="doSearch">Refresh Reports</div>
+  <div
+    class="flex w-1/6 mx-auto bg-gray-800 cursor-pointer items-center justify-center m-2 px-2 py-1 text-base text-white font-medium leading-6 text-black transition duration-150 ease-in-out bg-dark border-transparent rounded-md"
+    @click="doSearch"
+  >
+    Refresh Reports
+  </div>
   <table-lite
     :has-checkbox="false"
     :is-loading="table.isLoading"

@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
  * Range: One Year, Interval: Monthly
  *
  * Class Report1
+ *
  * @package App\Services\ReportGenerate\ReportTypes
  */
 class Report1 extends BaseReport implements ReportTypeInterface

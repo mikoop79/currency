@@ -5,9 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-app": "vue-cli-service build --dest ../laravel-app/public/vue --filename app2.js",
-    "watch": "vue-cli-service build --watch --dest ../laravel-app/public/vue",
-    "lint": "vue-cli-service lint"
+    "build-app": "vue-cli-service build --watch --dest ../laravel-app/public/vue",
+    "lint": "vue-cli-service lint",
+    "lint-fix": "vue-cli-service lint --fix"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -48,7 +48,8 @@
     },
     "rules": {
       "no-unused-vars": "off"
-    }
+    },
+    "ignorePatterns": [".eslintrc.js", "babel.config.js", "tailwind.config.js"]
   },
   "postbuild": "cp dist ../laravel-app/public/",
   "browserslist": [

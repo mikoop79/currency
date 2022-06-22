@@ -47,7 +47,7 @@
           </div>
           <div class="form-group">
             <div class="label" />
-            <div class="message">
+            <div class="message text-xs text-red-600">
               {{ message }}
             </div>
           </div>

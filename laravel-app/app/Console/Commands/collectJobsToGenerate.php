@@ -43,7 +43,7 @@ class collectJobsToGenerate extends Command
         // get any reports with status pending..
         $reports = Report::where('status_id', Report::REPORT_STATUSES['pending'])->get();
 
-        if (empty( $reports->count()) ){
+        if (empty($reports->count()) ) {
             Log::stack(['stdout'])->info('No jobs to generate.');
             return false;
         }

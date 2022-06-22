@@ -4,6 +4,10 @@
       <div
         class="text-center"
       >
+        <div v-if="liveConversions">
+          <CurrencyTable :live-data="liveConversions" />
+        </div>
+
         <div v-if="hasCurrencies">
           <MyReports :currencies="myCurrencies" />
         </div>
@@ -45,6 +49,7 @@ import axios from "axios";
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
 import MyReports from './MyReports'
+import CurrencyTable from './CurrencyTable'
 
 // Data
 const currencies_limit = ref(5)
@@ -56,6 +61,7 @@ let message = ref('')
 const hasCurrencies = ref(myCurrencies.value.length > 0)
 const settings = ref(Auth.user.value)
 const isLoading = ref(true)
+const liveConversions = ref([])
 
 // Functions / Methods
 const save = () => {
@@ -95,18 +101,39 @@ const getMyCurrencies = () => {
   axios.get('/api/setting/my-currencies')
       .then(({data}) => {
         if (!data) {
-          message = 'No Currencies to show';
+          message.value = 'No Currencies to show';
         }
         myCurrencies.value = data.data;
 
         hasCurrencies.value = myCurrencies.value.length > 0;
       })
       .catch((error) => {
-        this.message = error
+        this.message.value = error
       })
+  .finally(
+      () => {
+        if (hasCurrencies.value){
+          getCurrencyConversions();
+        }
+      }
+  )
 }
 
+const getCurrencyConversions = () => {
 
+  const params = {
+    'currencies' : myCurrencies.value
+  };
+
+
+  axios.get('/api/currency/live', {params: params})
+      .then(({data}) => {
+        liveConversions.value = data.data;
+      })
+      .catch((error) => {
+          message.value = error
+      })
+}
 // get a list of possible currencies to use
 const getAllCurrencies = () => {
   axios.get('/api/currency/list')
@@ -120,7 +147,7 @@ const getAllCurrencies = () => {
         data ? setCurrenciesSelect(data) : message.value = 'no response from list endpoint'
       })
       .catch((error) => {
-        message.value = error
+        message.value = error.data
       })
   .finally(() => {
     isLoading.value = false;
@@ -132,5 +159,4 @@ getMyCurrencies();
 if (!hasCurrencies.value) {
   getAllCurrencies();
 }
-
 </script>

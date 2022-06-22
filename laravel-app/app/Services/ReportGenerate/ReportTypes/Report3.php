@@ -10,7 +10,6 @@ use Illuminate\Support\Carbon;
 
 /**
  * Range: One Month, Interval: Daily
- *
  */
 class Report3 extends BaseReport implements ReportTypeInterface
 {

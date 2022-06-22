@@ -24,17 +24,21 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $requestData = $request->all();
-        $validator = Validator::make($requestData, [
+        $validator = Validator::make(
+            $requestData, [
             'name' => 'required|max:55',
             'email' => 'email|required|unique:users',
             'password' => 'required|confirmed'
-        ]);
+            ]
+        );
 
         if ($validator->fails()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'errors' => $validator->errors()->all()
-            ], 422);
+                ], 422
+            );
         }
 
         $requestData['password'] = Hash::make($requestData['password']);
@@ -45,7 +49,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request $request
      * @return JsonResponse
      */
     public function login(Request $request)

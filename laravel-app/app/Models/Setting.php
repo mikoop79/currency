@@ -11,7 +11,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class Setting
- * @package App\Models
+ *
+ * @package       App\Models
  * @property-read string currencies
  */
 class Setting extends Authenticatable

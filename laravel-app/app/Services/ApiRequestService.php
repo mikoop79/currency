@@ -23,8 +23,8 @@ class ApiRequestService
     }
 
     /**
-     * @param string $path
-     * @param array $params
+     * @param  string $path
+     * @param  array  $params
      * @return Response
      */
     public function get(string $path, array $params = []): Response
@@ -33,8 +33,8 @@ class ApiRequestService
     }
 
     /**
-     * @param string $path
-     * @param array $params
+     * @param  string $path
+     * @param  array  $params
      * @return Response
      */
     public function post(string $path, array $params = []): Response

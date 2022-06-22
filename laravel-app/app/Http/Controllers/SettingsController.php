@@ -23,15 +23,19 @@ class SettingsController extends Controller
 
             $user = Auth::user();
 
-            $validator = Validator::make($request->all(), [
+            $validator = Validator::make(
+                $request->all(), [
                 'currencies' => sprintf('required|array|size:%s', self::CURRENCY_NUMBER)
-            ]);
+                ]
+            );
             if ($validator->fails()) {
                 return json_encode($validator->errors());
             }
 
-            Setting::updateOrCreate(['user_id' => $user->getKey()], ['currencies' => json_encode($request->currencies),
-                'user_id' => $user->getKey()]);
+            Setting::updateOrCreate(
+                ['user_id' => $user->getKey()], ['currencies' => json_encode($request->currencies),
+                'user_id' => $user->getKey()]
+            );
 
         } catch (\Exception $exception) {
             return response()->json(['message' => $exception->getMessage()], $exception->getCode());
@@ -45,12 +49,13 @@ class SettingsController extends Controller
 
     /**
      * Get the users Currencies selected
-     * @param Request $request
+     *
+     * @param  Request $request
      * @return array
      */
     public function currencies(Request $request)
     {
-        if (empty($request->user()->my_currencies)){
+        if (empty($request->user()->my_currencies)) {
             return response()->json(['data' => []], 200);
         }
         $currencies = json_decode($request->user()->my_currencies, true);

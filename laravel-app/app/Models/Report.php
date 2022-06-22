@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Report
- * @package App\Models
+ *
+ * @package  App\Models
  * @property string $currency
  * @property int $status_id
  * @property Carbon $created_at
@@ -51,8 +52,8 @@ class Report extends Model
 
 
     /**
-     * @param Builder $query
-     * @param int $stats_id
+     * @param  Builder $query
+     * @param  int     $stats_id
      * @return Builder
      */
     public function scopeOfStatus(Builder $query, $stats_id)

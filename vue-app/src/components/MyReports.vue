@@ -21,7 +21,6 @@
       >
         Generate
       </div>
-
     </div>
     <h2 class="heading2">
       My Completed reports
@@ -53,7 +52,6 @@ export default defineComponent({
 
       },
     }
-
   },
   data: () => ({
     auth: Auth,

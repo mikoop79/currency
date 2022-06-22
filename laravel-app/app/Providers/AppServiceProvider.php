@@ -16,13 +16,17 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         // register the application fee budget service
-        $this->app->singleton(ApiRequestService::class, function () {
-            return new ApiRequestService();
-        });
+        $this->app->singleton(
+            ApiRequestService::class, function () {
+                return new ApiRequestService();
+            }
+        );
 
-        $this->app->singleton(ReportGenerateService::class, function () {
-            return new ReportGenerateService();
-        });
+        $this->app->singleton(
+            ReportGenerateService::class, function () {
+                return new ReportGenerateService();
+            }
+        );
     }
 
     /**

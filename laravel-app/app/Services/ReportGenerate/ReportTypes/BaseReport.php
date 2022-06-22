@@ -33,7 +33,7 @@ class BaseReport
     }
 
     /**
-     * @param array $params
+     * @param  array $params
      * @return array
      */
     public static function getIntervals(array $params): array
@@ -87,9 +87,13 @@ class BaseReport
             throw new \JsonException('Error with endpoint');
         }
 
-        $dates = self::getIntervals(array_merge($params, [
-            'carbon_interval' => $this->getCarbonInterval()
-        ]));
+        $dates = self::getIntervals(
+            array_merge(
+                $params, [
+                'carbon_interval' => $this->getCarbonInterval()
+                ]
+            )
+        );
 
         return self::getDataByDates($data['quotes'], $dates);
     }

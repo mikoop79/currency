@@ -23,7 +23,7 @@ class ReportGenerateStrategy
 
     public function updateStatus(): void
     {
-        if(!empty($this->reportType->getData())){
+        if(!empty($this->reportType->getData())) {
             $this->reportType->updateReportStatus(Report::REPORT_STATUSES['completed']);
         }
     }
