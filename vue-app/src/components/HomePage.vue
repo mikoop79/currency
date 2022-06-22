@@ -2,23 +2,32 @@
   <main>
     <div class="px-4 py-6 sm:px-0">
       <div
-          class="text-center"
+        class="text-center"
       >
-        <div v-if="this.hasCurrencies">
-          <MyReports :currencies="myCurrencies"></MyReports>
+        <div v-if="hasCurrencies">
+          <MyReports :currencies="myCurrencies" />
         </div>
         <div v-else>
           <h2>Please select {{ currencies_limit }} currencies to use for conversions.</h2>
 
           <div class="select-dropdown">
-            <v-select :loading="isLoading" v-model="selected" placeholder="Select..." multiple :options="currencies"
-                      :selectable="() => selected.length < currencies_limit"></v-select>
+            <v-select
+              v-model="selected"
+              :loading="isLoading"
+              placeholder="Select..."
+              multiple
+              :options="currencies"
+              :selectable="() => selected.length < currencies_limit"
+            />
             <div>Currencies Selected: {{ selected.length }}</div>
             <div> {{ message }}</div>
 
             <div v-show="selected.length">
-              <div v-if="selected.length === currencies_limit" @click="save"
-                   class="flex bg-gray-800  items-center justify-center m-2 px-8 py-3 text-base text-white font-medium leading-6 text-black transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:ring md:py-4 md:text-lg md:px-10">
+              <div
+                v-if="selected.length === currencies_limit"
+                class="flex bg-gray-800  items-center justify-center m-2 px-8 py-1 text-base text-white font-medium leading-6 text-black transition duration-150 ease-in-out bg-dark border-transparent rounded-md focus:outline-none focus:ring md:py-4 md:text-lg md:px-10"
+                @click="save"
+              >
                 Save my Currencies
               </div>
             </div>
@@ -61,7 +70,9 @@ const save = () => {
   axios.post('/api/setting/store', data)
       .then((data) => {
         message.value = 'Settings Saved!.... redirecting';
-        window.routerInstance.push('/');
+        // window.location.reload(true);
+        hasCurrencies.value = true;
+        getMyCurrencies();
       })
       .catch((error) => {
         message.value = error.message;

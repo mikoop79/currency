@@ -12,13 +12,9 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-        <!-- Scripts -->
-
     </head>
     <body class="font-sans antialiased">
-        <div id="app">
-            test
-        </div>
+        <div id="app"></div>
         <script defer="defer" src="./vue/js/app.js"></script>
         <script defer="defer" src="./vue/js/chunk-vendors.js"></script>
     </body>

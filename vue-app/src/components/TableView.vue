@@ -1,14 +1,13 @@
 <template>
-
   <table-lite
-      :has-checkbox="false"
-      :is-loading="table.isLoading"
-      :columns="table.columns"
-      :rows="table.rows"
-      :total="table.totalRecordCount"
-      :messages="table.messages"
-      @do-search="doSearch"
-  ></table-lite>
+    :has-checkbox="false"
+    :is-loading="table.isLoading"
+    :columns="table.columns"
+    :rows="table.rows"
+    :total="table.totalRecordCount"
+    :messages="table.messages"
+    @do-search="doSearch"
+  />
 </template>
 
 <script>

@@ -1,31 +1,60 @@
 <template>
   <div class="p-4 text-center text-gray-400 border-gray-100 rounded-lg  h-96 w-500 login">
     <div class="form">
-    <h1>Register</h1>
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" v-model="user.name">
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="text" v-model="user.email">
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" v-model="user.password">
-    </div>
-    <div class="form-group">
-      <label for="password_confirmation">Confirm</label>
-      <input type="password" v-model="user.password_confirmation">
-    </div>
+      <h1>Register</h1>
       <div class="form-group">
-        <div class="label"></div>
-        <button class="submit cursor-pointer rounded-none px-10 bg-gray-400 text-white" @click="register()" value="" >Register</button>
-        <div class="label"></div>
-        <div class="message">{{ message }}</div>
-
+        <label for="name">Name</label>
+        <input
+          v-model="user.name"
+          type="text"
+        >
       </div>
-  </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          v-model="user.email"
+          type="text"
+        >
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+
+        <input
+          v-model="user.password"
+          type="password"
+        >
+      </div>
+      <div class="form-group">
+        <label for="password_confirmation">Confirm</label>
+        <input
+          v-model="user.password_confirmation"
+          type="password"
+        >
+      </div>
+      <div class="form-group">
+        <div class="label" />
+        <button
+          class="submit cursor-pointer rounded-none px-10 bg-gray-400 text-white"
+          value=""
+          @click="register()"
+        >
+          Register
+        </button>
+        <div class="label" />
+        <div class="message">
+          {{ message }}
+        </div>
+
+        <div class="message text-xs text-red-600">
+          <ul>
+            <li class="text-left" :key="error.id"
+              v-for="(error) in errors"
+
+            >{{error}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -43,20 +72,21 @@ export default {
         password: '',
         password_confirmation: '',
         message: [],
-      }
+      },
+      errors: []
     };
   },
 
   methods: {
     register() {
-      console.log(this.user);
       axios.post('/api/auth/register', this.user)
           .then(() => {
             this.$router.push('/login');
           })
           .catch((error) => {
+            console.log('errors');
             console.log(error.response.data.errors);
-            this.message = error.response.data.errors;
+            this.errors = error.response.data.errors;
           });
     }
   }

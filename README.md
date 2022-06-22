@@ -1,20 +1,33 @@
 ### Installation 
 
+#### Vue App
+
+Go to the vue-app folder and run
+```shell
+cd {ROOT}
+cd ./vue-app
+yarn
+```
+
+```
+yarn run watch 
+```
+> the watch command will build the files and copy them to the laravel application
+
 #### Laravel App
 
 Go to laravel app and run 
 ```shell
+cd {ROOT}
 cd ./laravel-app
 composer install
 ```
 
 ```shell
-php artisan migrations
-php artisan serve
+php artisan migrate
 ```
 
 Check the APP_KEY variable is not empty.
-
 ```
 APP_KEY={base64:key}
 ```
@@ -29,35 +42,27 @@ Add your API key from the currency layer API to the .env
 CURRENCY_API_KEY=XXXX
 ```
 
+#### Schedule jobs
 
-#### Vue App
-
-Go to laravel app and run
+Run command to set up the scheduled jobs (normally this would be set to run on cron)
 ```shell
-cd {ROOT}
-cd ./vue-app
-yarn
-
-yarn run watch
+php artisan schedule:run
 ```
 
+run the report generation manually with following command
 ```shell
-php artisan migrations
+php artisan currency:collect
+```
+
+### Viewing the application
+```shell
 php artisan serve
 ```
 
-Check the APP_KEY variable is not empty.
+go to url (depending on port)  eg. [http://127.0.0.1:8000/login](http://127.0.0.1:8000/login)
 
-```
-APP_KEY={base64:key}
-```
-If it is, run
-```
-php artisan key:generate
-```
 
-#### API KEY
-Add your API key from the currency layer API to the .env
-```
-CURRENCY_API_KEY=XXXX
-```
+
+
+
+

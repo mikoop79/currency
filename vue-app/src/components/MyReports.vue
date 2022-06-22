@@ -1,18 +1,31 @@
 <template>
   <div>
-    <h2 class="heading2">Generate report</h2>
+    <h2 class="heading2">
+      Generate report
+    </h2>
     <div class="select-dropdown">
-      <v-select :loading="reportTypesLoading" v-model="selected" :options="reportTypes"></v-select>
-      <v-select :loading="currenciesLoading" v-model="report.currency" :options="currencies"></v-select>
+      <v-select
+        v-model="selected"
+        :loading="reportTypesLoading"
+        :options="reportTypes"
+      />
+      <v-select
+        v-model="report.currency"
+        :loading="currenciesLoading"
+        :options="currencies"
+      />
       <div
-          class="submitReport my-8 cursor-pointer rounded-none p-10 bg-gray-600 text-white m-10 my-10 flex bg-gray-800  items-center justify-center m-2 px-8 py-3 text-base text-white font-medium leading-6 text-black transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:ring md:py-4 md:text-lg md:px-10"
-          @click="saveReport">
-        Generate Report
+        class="submitReport flex bg-gray-800  cursor-pointer items-center justify-center m-2 px-8 py-1 text-base text-white font-medium leading-6 text-black transition duration-150 ease-in-out bg-dark border-transparent rounded-md focus:outline-none focus:ring md:py-4 md:text-lg md:px-10"
+        @click="saveReport"
+      >
+        Generate
       </div>
       <div>{{ message }}</div>
     </div>
-    <h2 class="heading2">My Completed reports</h2>
-    <table-view2></table-view2>
+    <h2 class="heading2">
+      My Completed reports
+    </h2>
+    <table-view2 />
     <hr>
   </div>
 </template>
@@ -27,13 +40,19 @@ import TableView2 from './TableView';
 const default_report_type = 'Select a report type..';
 const default_currency_type = 'Select a currency..';
 export default defineComponent({
+  name: 'MyReports',
   components: {
     vSelect,
     TableView2
   },
-  name: 'MyReports',
   props: {
-    currencies: Array
+    currencies: {
+      type: [Array],
+      default: function(){
+
+      },
+    }
+
   },
   data: () => ({
     auth: Auth,

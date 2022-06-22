@@ -2,17 +2,17 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ReportResource extends JsonResource
 {
-    public static string $wrap = 'rows';
 
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param  Request  $request
+     * @return array
      */
     public function toArray($request)
     {
@@ -21,7 +21,7 @@ class ReportResource extends JsonResource
             'name' => $this->name,
             'created_at' => $this->created_at->format('Y-m-d'),
             'currency' => $this->currency,
-            'data' => json_decode($this->data, true)
+            'data' => json_decode($this->data, true, 512, JSON_THROW_ON_ERROR)
         ];
     }
 }

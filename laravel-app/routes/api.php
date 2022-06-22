@@ -45,11 +45,4 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 });
 
-Route::middleware('api')->get('/user', function (\Illuminate\Http\Request $request) {
-    return $request->header();
-});
-
 Route::get('report-types', [ReportController::class, 'types']);
-Route::get('report-types2', [ReportController::class, 'types2']);
-
-Route::get('user', [AuthController::class, 'user']);

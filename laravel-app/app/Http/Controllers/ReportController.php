@@ -40,7 +40,7 @@ class ReportController extends Controller
             return response()->json(['message' => $exception->getMessage()], 500);
         }
 
-        return response()->json(['message' => 'Report Stored', 'report' => $report->toArray()], 200);
+        return response()->json(['message' => 'Report Schedule To Generate!', 'report' => $report->toArray()], 200);
 
     }
 

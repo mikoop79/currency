@@ -16,6 +16,4 @@ Route::get('{any}', function () {
     return view('layouts.app');
 })->where('any', '.*');
 
-
-
 require __DIR__.'/auth.php';
