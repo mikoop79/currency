@@ -47,10 +47,13 @@
 
         <div class="message text-xs text-red-600">
           <ul>
-            <li class="text-left" :key="error.id"
+            <li
               v-for="(error) in errors"
-
-            >{{error}}</li>
+              :key="error.id"
+              class="text-left"
+            >
+              {{ error }}
+            </li>
           </ul>
         </div>
       </div>

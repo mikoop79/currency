@@ -13,7 +13,10 @@
           Generate Report
         </router-link>
       </div>
-      <div v-else class="p-4 text-center text-gray-400 border-gray-100 rounded-lg  h-96 w-500 login" >
+      <div
+        v-else
+        class="p-4 text-center text-gray-400 border-gray-100 rounded-lg  h-96 w-500 login"
+      >
         <div class="form">
           <h1>Login</h1>
 
@@ -42,12 +45,12 @@
               Submit
             </button>
           </div>
-            <div class="form-group">
-             <div class="label" />
-             <div class="message">
+          <div class="form-group">
+            <div class="label" />
+            <div class="message">
               {{ message }}
             </div>
-             </div>
+          </div>
           <div class="form-group">
             <div class="label" />
             <div class="message text-xs">

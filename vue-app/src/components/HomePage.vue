@@ -50,7 +50,7 @@ import MyReports from './MyReports'
 const currencies_limit = ref(5)
 const user = ref(Auth.user)
 const currencies = ref([])
-let myCurrencies = ref([])
+const myCurrencies = ref([])
 const selected = ref([])
 let message = ref('')
 const hasCurrencies = ref(myCurrencies.value.length > 0)
