@@ -1,0 +1,105 @@
+<template>
+  <div>
+    <h2 class="heading2">Generate report</h2>
+    <div class="select-dropdown">
+      <v-select :loading="reportTypesLoading" v-model="selected" :options="reportTypes"></v-select>
+      <v-select :loading="currenciesLoading" v-model="report.currency" :options="currencies"></v-select>
+      <div
+          class="submitReport my-8 cursor-pointer rounded-none p-10 bg-gray-600 text-white m-10 my-10 flex bg-gray-800  items-center justify-center m-2 px-8 py-3 text-base text-white font-medium leading-6 text-black transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:ring md:py-4 md:text-lg md:px-10"
+          @click="saveReport">
+        Generate Report
+      </div>
+      <div>{{ message }}</div>
+    </div>
+    <h2 class="heading2">My Completed reports</h2>
+    <table-view2></table-view2>
+    <hr>
+  </div>
+</template>
+
+<script>
+import {defineComponent} from "vue";
+import axios from "axios";
+import Auth from "@/Auth";
+import vSelect from 'vue-select';
+import TableView2 from './TableView';
+
+const default_report_type = 'Select a report type..';
+const default_currency_type = 'Select a currency..';
+export default defineComponent({
+  components: {
+    vSelect,
+    TableView2
+  },
+  name: 'MyReports',
+  props: {
+    currencies: Array
+  },
+  data: () => ({
+    auth: Auth,
+    //currencies: [],
+    message: '',
+    reportsMessage: '',
+    selected: default_report_type,
+    reportTypes: [],
+    user: {},
+    report: {
+      currency: default_currency_type,
+      type: 1,
+    },
+    currenciesLoading: true,
+    reportTypesLoading: true,
+  }),
+  created() {
+    this.getReportTypes();
+
+  },
+  methods: {
+
+    saveReport() {
+      axios.post('/api/report/submit', {
+        currency: this.report.currency.value,
+        type: this.selected.value,
+      })
+          .then(({data}) => {
+
+            if (!data) {
+              this.message = 'error';
+            }
+
+            this.message = data.message;
+
+            let _this = this;
+            setTimeout(function () {
+              _this.refreshGenerateForm()
+            }, 3000)
+
+          })
+          .catch((error) => {
+            this.message = error
+          })
+    },
+    getReportTypes() {
+      axios.get('/api/report-types')
+          .then(({data}) => {
+
+            if (!data) {
+              this.message = 'No Reports to show';
+            }
+            this.reportTypes = data;
+            this.reportTypesLoading = false;
+            this.currenciesLoading = false;
+          })
+          .catch((error) => {
+            this.message = error
+          })
+    },
+
+    refreshGenerateForm() {
+      this.report.currency = default_report_type;
+      this.selected = default_currency_type;
+      this.message = '';
+    }
+  }
+})
+</script>

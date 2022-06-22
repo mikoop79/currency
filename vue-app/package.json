@@ -1,0 +1,59 @@
+{
+  "name": "vue-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build-app": "vue-cli-service build --dest ../laravel-app/public/vue --filename app2.js",
+    "watch": "vue-cli-service build --watch --dest ../laravel-app/public/vue",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "core-js": "^3.8.3",
+    "vue": "^3.2.37",
+    "vue-axios": "^3.4.1",
+    "vue-router": "^4.0.16",
+    "vue-select": "^4.0.0-beta.3",
+    "vue3-table-lite": "^1.2.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "@vue/compiler-sfc": "^3.2.37",
+    "autoprefixer": "^10.4.7",
+    "cross-env": "^7.0.3",
+    "eslint-plugin-vue": "^8.0.3",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^2.2.19",
+    "vite": "^2.9.12"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {
+      "no-unused-vars": "off"
+    }
+  },
+  "postbuild": "cp dist ../laravel-app/public/",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}

@@ -1,0 +1,60 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.login{
+    margin: 0 auto;
+    width: 350px;
+}
+
+.login .form{
+    padding: 10px;
+}
+
+.login .form-group {
+    margin: 10px 0;
+    width: 320px;
+}
+.login .form-group label, .login .form-group .label{
+    padding: 10px 0;
+    min-width: 84px;
+    float: left;
+}
+.login .form-group input, .login .form-group .message, .login .form-group button{
+    padding: 10px;
+    text-align: left;
+}
+
+.login .form-group input.submit, .login .form-group .message{
+    padding: 10px;
+    text-align: center;
+}
+
+.login .form-group .register{
+    padding: 10px;
+    text-align: left;
+    width:150px;
+}
+
+.submitReport{
+    width:150px;
+    padding: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 10px;
+    margin-bottom: 100px;
+}
+
+.select-dropdown{
+    width: 450px;
+    margin: 10px auto;
+}
+
+.select-dropdown .v-select{
+    margin-bottom: 10px;
+}
+
+.heading2{
+    margin-bottom: 2em;
+    font-size: 1.5em;
+}
